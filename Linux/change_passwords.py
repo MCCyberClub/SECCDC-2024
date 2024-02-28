@@ -1,12 +1,13 @@
 import os
 import random
-
 from passlib.hash import sha512_crypt
+
 
 SHADOW_FILE = "/etc/passwd"
 USERS = ["root"]
 CHAR_SET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^'
 PASSWORD_LENGTH = 15
+
 
 def generate_password():
 	password = ""
@@ -20,6 +21,7 @@ def generate_password_hash(password):
 	hash = sha512_crypt.using(rounds=5000).hash(password)
 	return hash
 
+
 def change_password(user):
 	with open(SHADOW_FILE, "r") as pass_file:
 		shadow_users = pass_file.readlines()
@@ -32,7 +34,7 @@ def change_password(user):
 		username = u_splitted[0]
 
 		if username == user:
-			new_password = generate_password(PASSWORD_LENGTH, CHAR_SET)
+			new_password = generate_password()
 			new_password_hash = generate_password_hash(new_password)
 
 			print("[+] Changing password for " + username)
