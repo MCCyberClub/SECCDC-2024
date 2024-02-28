@@ -18,8 +18,8 @@ def generate_password():
 
 
 def generate_password_hash(password):
-	hash = sha512_crypt.using(rounds=5000).hash(password)
-	return hash
+	pass_hash = sha512_crypt.using(rounds=5000).hash(password)
+	return pass_hash
 
 
 def change_password(user):
